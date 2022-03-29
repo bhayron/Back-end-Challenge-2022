@@ -1,25 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+  Logger,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { Article } from './interfaces/article.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 
 @Injectable()
 export class ArticlesService {
-  create(createArticleDto: CreateArticleDto) {
-    return 'This action adds a new article';
+  constructor(
+    @InjectModel('Articles') private readonly articleModel: Model<Article>,
+  ) {}
+
+  private logger = new Logger(ArticlesService.name);
+
+  async create(createArticleDto: CreateArticleDto): Promise<Article> {
+    const article = createArticleDto;
+
+    const createArticle = new this.articleModel(article);
+    return await createArticle.save();
   }
 
-  findAll() {
-    return `This action returns all articles`;
+  async findAll(paginationQuery: PaginationQueryDto): Promise<Array<Article>> {
+    const { skip, limit } = paginationQuery;
+    const count = await this.articleModel.count();
+    const query = this.articleModel
+      .find()
+      .skip(skip - 1 || 0)
+      .limit(limit || 100);
+    return query;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} article`;
+  async findOne(id: string) {
+    const query = await this.articleModel.find({ _id: id });
+    return query;
   }
 
-  update(id: number, createArticleDto: CreateArticleDto) {
-    return `This action updates a #${id} article`;
+  async update(_id: string, createArticleDto: CreateArticleDto) {
+    await this.articleModel
+      .findOneAndUpdate({ _id }, { $set: createArticleDto })
+      .exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} article`;
+  async remove(_id: string) {
+    return await this.articleModel.deleteOne({ _id }).exec();
   }
 }

@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 
-export interface ArticleInterface extends Document {
-  readonly id: string;
+export interface Article extends Document {
+  readonly article: string;
   featured: string;
   title: string;
   url: string;
@@ -11,6 +11,7 @@ export interface ArticleInterface extends Document {
   publishedAt: string;
   launches: Array<Launches>;
   events: Array<Events>;
+  number: Array<Count>;
 }
 
 export interface Launches {
@@ -21,4 +22,8 @@ export interface Launches {
 export interface Events {
   id: string;
   provider: string;
+}
+
+export interface Count {
+  number: string;
 }

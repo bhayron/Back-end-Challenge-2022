@@ -6,36 +6,48 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  UsePipes,
+  ValidationPipe,
+  Put,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
+import { Article } from './interfaces/article.interface';
 
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
   @Post()
-  create(@Body() createArticleDto: CreateArticleDto) {
-    return this.articlesService.create(createArticleDto);
+  // @UsePipes(ValidationPipe)
+  async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
+    return await this.articlesService.create(createArticleDto);
   }
 
   @Get()
-  findAll() {
-    return this.articlesService.findAll();
+  async findAll(
+    @Query() paginationQuery: PaginationQueryDto,
+  ): Promise<Array<Article> | Article> {
+    return await this.articlesService.findAll(paginationQuery);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.articlesService.findOne(+id);
+    return this.articlesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() createArticleDto: CreateArticleDto) {
-    return this.articlesService.update(+id, createArticleDto);
+  @Put(':_id')
+  async update(
+    @Body() createArticleDto: CreateArticleDto,
+    @Param('_id') _id: string,
+  ): Promise<void> {
+    await this.articlesService.update(_id, createArticleDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.articlesService.remove(+id);
+  @Delete(':_id')
+  async remove(@Param('_id') _id: string): Promise<void> {
+    await this.articlesService.remove(_id);
   }
 }

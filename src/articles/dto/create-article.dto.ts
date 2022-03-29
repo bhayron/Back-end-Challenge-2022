@@ -4,7 +4,7 @@ import { Events, Launches } from '../interfaces/article.interface';
 export class CreateArticleDto {
   @IsString()
   @IsNotEmpty()
-  readonly id: string;
+  readonly article: string;
 
   @IsString()
   @IsNotEmpty()
