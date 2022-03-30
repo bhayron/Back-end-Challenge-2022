@@ -15,7 +15,7 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it('should return "Back-end Challenge 2021 🏅 - Space Flight News"', () => {
       expect(appController.getHelloChallenge()).toBe(
         'Back-end Challenge 2021 🏅 - Space Flight News',
       );

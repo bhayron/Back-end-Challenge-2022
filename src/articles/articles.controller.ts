@@ -3,12 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
-  UsePipes,
-  ValidationPipe,
   Put,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
