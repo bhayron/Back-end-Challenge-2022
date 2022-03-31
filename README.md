@@ -17,7 +17,7 @@ Menu:
 - [Acesso ao projeto](#acesso-ao-projeto)
 - [Acesso a documentação (SWAGGER)](#acesso-a-documentação-swagger)
 
-<img  src="readme.png"  alt="readme image">
+<img  src="uml.png"  alt="readme image">
 
 > documentação da api
 
