@@ -5,8 +5,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('Article documentation')
-    .setDescription('The article API description')
+    .setTitle('Space Flight News documentation')
+    .setDescription('The Back-end Challenge 2022 API description')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

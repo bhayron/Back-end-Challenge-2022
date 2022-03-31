@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModuleTest } from './../src/app.module.test';
+import { AppModuleTest } from '../src/app.module.teste';
 import { CreateArticleDto } from 'src/articles/dto/create-article.dto';
 
 describe('AppController (e2e)', () => {

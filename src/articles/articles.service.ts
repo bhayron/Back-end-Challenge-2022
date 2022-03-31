@@ -1,5 +1,10 @@
 import 'dotenv/config';
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Article } from './interfaces/article.interface';
 import { InjectModel } from '@nestjs/mongoose';
@@ -64,23 +69,34 @@ export class ArticlesService {
 
   async create(createArticleDto: CreateArticleDto): Promise<Article> {
     const article = createArticleDto;
-
-    const createArticle = new this.articleModel(article);
-    return await createArticle.save();
+    try {
+      const createArticle = new this.articleModel(article);
+      return await createArticle.save();
+    } catch (error) {
+      throw new BadRequestException(`Erro ao cadastrar artigo`);
+    }
   }
 
   async findAll(paginationQuery: PaginationQueryDto): Promise<Array<Article>> {
     const { skip, limit } = paginationQuery;
-    const query = this.articleModel
-      .find()
-      .skip(skip || 0)
-      .limit(limit || 100);
-    return query;
+    try {
+      const query = this.articleModel
+        .find()
+        .skip(skip || 0)
+        .limit(limit || 10);
+      return query;
+    } catch (error) {
+      throw new BadRequestException(`Artigos não encontrados`);
+    }
   }
 
   async findOne(id: string) {
-    const query = await this.articleModel.find({ _id: id });
-    return query;
+    try {
+      const query = await this.articleModel.find({ _id: id });
+      return query;
+    } catch (error) {
+      throw new NotFoundException(`Artigo não encontrado`);
+    }
   }
 
   async update(_id: string, createArticleDto: CreateArticleDto) {
