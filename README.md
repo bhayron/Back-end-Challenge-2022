@@ -1,73 +1,74 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## Back-end Challenge 🏅 2022 - Space Flight News
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Código criado para o desafio relacionado à vaga de Backend NodeJS na Coodesh.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Repositório do Desafio: [https://github.com/bhayron/Back-end-Challenge-2022](https://github.com/bhayron/Back-end-Challenge-2022)
 
-## Description
+Projeto realizado por Bhayron Klivilan [bhayronklivilan@gmail.com](mailto:bhayronklivilan@gmail.com)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Menu:
 
-## Installation
+- [Ferramentas Utilizadas](#ferramentas-utilizadas)
+- [Instalação](#instalação)
+- [Arquivo de configuração](#arquivo-de-configuração)
+- [Executar a aplicação com Docker](#executar-a-aplicação-com-docker)
+- [Executar teste da API](#executar-teste-da-api)
+- [Executar a aplicação em ambiente de desenvolvimento](#executar-a-aplicação-em-ambiente-de-desenvolvimento)
+- [Acesso ao projeto](#acesso-ao-projeto)
+- [Acesso a documentação (SWAGGER)](#acesso-a-documentação-swagger)
 
-```bash
-$ npm install
+<img  src="readme.png"  alt="readme image">
+
+> documentação da api
+
+## Ferramentas Utilizadas
+
+- NestJS (framework node) utilizando Typescript
+- Swagger (documentação da api)
+- Docker(virtualização e integração da api)
+- MongoDB(banco de dados utilizado na api)
+- Jest(TDD-executor de testes unitarios)
+- Lint e Prettier (formatação e qualidade do código)
+
+## Instalação
+
+Executar o comando para instalar as dependências:
+
+```
+ yarn
 ```
 
-## Running the app
+## Arquivo de configuração
 
-```bash
-# development
-$ npm run start
+Criar um arquivo `.env` baseado no arquivo `.env.example`, editando os valores que já existem, caso necessário.
 
-# watch mode
-$ npm run start:dev
+## Executar a aplicação com Docker
 
-# production mode
-$ npm run start:prod
+Executar o comando:
+
+```
+docker-compose up
 ```
 
-## Test
+OBS: esse comando inicializará a aplicação
 
-```bash
-# unit tests
-$ npm run test
+## Executar teste da API
 
-# e2e tests
-$ npm run test:e2e
+Para testar a API , execute:
 
-# test coverage
-$ npm run test:cov
+```
+ yarn test
 ```
 
-## Support
+## Acesso ao projeto
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Após executar o projeto o mesmo poderá ser visualizado através da URL:
 
-## Stay in touch
+`http://localhost:{PORT}/`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Onde `{PORT}` é o valor da porta configurada no arquivo `.env`, por padrão é a 3000.
 
-## License
+## Acesso a documentação (SWAGGER)
 
-Nest is [MIT licensed](LICENSE).
+Acessar:
+`http://localhost:{PORT}/docs`
