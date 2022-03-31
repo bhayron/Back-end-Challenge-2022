@@ -22,7 +22,7 @@ export class ArticlesService {
 
   private logger = new Logger(ArticlesService.name);
 
-  @Cron('* 33 * * * *')
+  @Cron('* 56 * * * *')
   public async handleCron(createArticleDto: CreateArticleDto) {
     console.log('Helo cron');
 
@@ -34,7 +34,7 @@ export class ArticlesService {
     //laço for, pegando o total de artigos e implementando paginado
     //para que não sobrecarregue a api de artigos nem a nossa api
 
-    for (let i = 0; i < pagesToLoad; i++) {
+    for (let i = 1; i < pagesToLoad + 1; i++) {
       const getArticle = await axios
         .get(`${url}?_limit=1&_start=${i}`)
         .then((res) => {
@@ -44,7 +44,6 @@ export class ArticlesService {
             console.log('Erro ao pegar dados ');
           }
         });
-
       const articleFound = await this.articleModel
         .findOne({ title: getArticle.title })
         .exec();
@@ -58,37 +57,7 @@ export class ArticlesService {
         //   .findOneAndUpdate({ getArticle }, { $set: createArticleDto })
         //   .exec();
       }
-      // console.log('Usuario criado/atualizado');
     }
-
-    // for (let i = 1; i < pagesToLoad + 1; i++) {
-    //   const getUser = await api
-    //     .get(`${url}/api/v1/user?page=${i}&per_page=1`)
-    //     .then((res) => {
-    //       return res.data;
-    //     });
-    //   const userArray = await getUser.users.data;
-    //   const addressArray = userArray[0].addresses;
-    //   const contactArray = userArray[0].contacts;
-    //   const userCreate = {
-    //     fullName: userArray[0].fullName,
-    //     email: userArray[0].email,
-    //     addresses: addressArray[0].address,
-    //     addressNumber: addressArray[0].countryCode,
-    //     phoneNumber: contactArray[0].phoneNumber,
-    //   };
-    //   const userFound = await this.userModel
-    //     .findOne({ fullName: userArray[0].fullName })
-    //     .exec();
-    //   if (userFound == null) {
-    //     const createArticleDto = new this.userModel(userCreate);
-    //     return await createArticleDto.save();
-    //   } else {
-    //     await this.userModel
-    //       .findOneAndUpdate({ userCreate }, { $set: createArticleDto })
-    //       .exec();
-    //   }
-    // }
   }
 
   async create(createArticleDto: CreateArticleDto): Promise<Article> {
