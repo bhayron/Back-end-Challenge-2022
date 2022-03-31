@@ -18,7 +18,6 @@ export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
   @Post()
-  // @UsePipes(ValidationPipe)
   async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
     return await this.articlesService.create(createArticleDto);
   }

@@ -100,12 +100,20 @@ export class ArticlesService {
   }
 
   async update(_id: string, createArticleDto: CreateArticleDto) {
-    await this.articleModel
-      .findOneAndUpdate({ _id }, { $set: createArticleDto })
-      .exec();
+    try {
+      await this.articleModel
+        .findOneAndUpdate({ _id }, { $set: createArticleDto })
+        .exec();
+    } catch (error) {
+      throw new BadRequestException(`Erro ao atualizar artigo`);
+    }
   }
 
   async remove(_id: string) {
-    return await this.articleModel.deleteOne({ _id }).exec();
+    try {
+      return await this.articleModel.deleteOne({ _id }).exec();
+    } catch (error) {
+      throw new BadRequestException(`Erro ao remover artigo`);
+    }
   }
 }
