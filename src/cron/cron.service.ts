@@ -15,7 +15,7 @@ export class CronService {
 
   private logger = new Logger(CronService.name);
 
-  @Cron('* * * * * *')
+  @Cron('* * 9 * * *')
   public async handleCron(createArticleDto: CreateArticleDto) {
     this.logger.debug('Cron Iniciado');
 
